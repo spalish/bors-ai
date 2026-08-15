@@ -27,5 +27,5 @@ jobs:
           pip install requests
 
       - name: اجرای تحلیل بازار
-        run: |
-          python market_data.py
+       run: |
+          python daily_report.py
