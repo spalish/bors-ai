@@ -1,0 +1,31 @@
+name: BORS-AI Daily Market Analysis
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    # اجرای روزانه در ساعت 14:00 UTC
+    # برابر با 17:30 به وقت ایران در حالت ساعت تابستانی نیست
+    - cron: "0 14 * * 0-4"
+
+jobs:
+  market-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: دریافت پروژه
+        uses: actions/checkout@v4
+
+      - name: نصب Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: نصب وابستگی‌ها
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: اجرای تحلیل بازار
+        run: |
+          python market_data.py
